@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockbuster Success Prediction</title>
+    <link rel="stylesheet" href="predict.css">
+    <link rel="icon" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+<style>
+    
+    .navcontent {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.navcontent:before,
+.navcontent:after {
+  content:'Yeah!';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background: #141615;
+  
+}
+
+.navcontent:hover:after {
+  right: 100%;
+  transition: width 0.5s 0.2s;
+}
+
+.navcontent:hover:before,
+.navcontent:hover:after {
+  width: 100%;
+  transform: scale(1.0);
+}
+
+
+
+.container {
+
+  height: 300px;
+  width: 600px;
+
+  
+  display: flex;
+}
+
+.card {
+  display: flex;
+  height: 280px;
+  width: 200px;
+  background-color: #17141d;
+  border-radius: 10px;
+  box-shadow: -1rem 0 3rem #000;
+/*   margin-left: -50px; */
+  transition: 0.4s ease-out;
+  position: relative;
+
+}
+
+.card:not(:first-child) {
+    margin-left: -50px;
+}
+
+.card:hover {
+  transform: translateY(-20px);
+  transition: 0.4s ease-out;
+}
+
+.card:hover ~ .card {
+  position: relative;
+  left: 50px;
+  transition: 0.4s ease-out;
+}
+
+.title {
+  color: white;
+  font-family:Sacramento;
+  font-size: 30px;
+  font-weight: 900;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+.bar {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  height: 5px;
+  width: 150px;
+}
+
+.emptybar {
+  background-color: #2e3033;
+  width: 100%;
+  height: 100%;
+}
+
+.filledbar {
+  position: absolute;
+  top: 0px;
+  z-index: 3;
+  width: 0px;
+  height: 100%;
+  background: rgb(0,154,217);
+  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
+  transition: 0.6s ease-out;
+}
+
+.card:hover .filledbar {
+  width: 120px;
+  transition: 0.4s ease-out;
+}
+
+.circle {
+  position: absolute;
+  top: 150px;
+  left: calc(50% - 60px);
+}
+
+.stroke {
+  stroke: white;
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
+  transition: 0.6s ease-out;
+}
+
+svg {
+  fill: #17141d;
+  stroke-width: 2px;
+}
+
+.card:hover .stroke {
+  stroke-dashoffset: 100;
+  transition: 0.6s ease-out;
+}
+
+#myButton {
+  background-color:black;
+  border: none;
+  color: rgb(17, 12, 12);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: Bungee Spice;
+  font-size: 30px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 10px;
+}
+
+#myButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+</style>
+
+</head>
+<body style=" margin:0px; padding:0px; background-color: rgb(10, 9, 9);">
+    <div style=" background-color: rgba(23,20,24,255); display:flex; align-items: center; justify-content: space-between; flex-wrap:wrap;">
+        <div id="logopart">
+           <img src="logo.png" style=" width:450px; height:100px">
+        </div>
+        <nav style=" color:white; font-size: 24px; display:flex;text-align: left; gap:50px; font-family:Bungee Spice; flex-wrap:wrap;">
+          <a href="index.html" target=" _self">
+            <li class=" navcontent"  style=" display:inline-block">Home</li>
+          </a>
+         
+          <a href="predict.html" target="_self">
+            <li class=" navcontent"   style=" display:inline-block">Predict</li>
+          </a>
+          <a href="contact.html" target="_self">
+            <li class=" navcontent"   style=" display:inline-block">Contact</li>
+          </a>
+
+        </nav>
+        <div>
+            <img src="menu (1).png" style=" width:100px; height:100px">
+       
+        </div>
+    </div>
+        
+   <div>
+    <p style=" text-align:center; font-size: 26px; font-family:Bungee Spice; "> Before Prediction Follow The Rules Mentioned Down Below</p>
+    
+    <p style=" text-align:center; color:white;font-size: 20px; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+      . Enter accurate movie details including name, release year, genre, IMDb rating.<br>
+      . Verify and update input data regularly to maintain data integrity.<br>
+      . Select genres and IMDb ratings closely aligned with the movie's characteristics to ensure relevance in predictions.</p>
+   </div>
+   <br>
+   
+<div style=" display: flex; flex-wrap:wrap; margin-bottom: 20px;">
+
+  <div style=" color:white; background-color:#141615;flex-grow: 1;flex-basis:45%; border-top-left-radius: 20px; border-bottom-left-radius: 20px; margin-left:10px">
+    <p style=" text-align:center; font-size: 26px; font-family:Bungee Spice; "> Let's Predict</p>
+     
+   
+    <form style=" color:white;background-color:#141615;width:400px; font-family: Martian Mono;" >
+     
+      <table style=" margin-left:100px;">
+        <tr>
+          <td>Movie Name</td>
+          <td></td>
+
+        </tr>
+        <tr>
+        <td><input type="text" style=" width:250px ;height:30px" placeholder=" LEO" id="movie" required><br><br></td>
+        <td></td>
+        </tr>
+        <tr>
+          <td>Release Year</td>
+
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="date" size="30"style=" width:250px ;height:30px" placeholder="Ex:- 2020" id="year" required><br><br></td>
+        </tr>
+        <tr>
+          <td>Genre</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><select style=" width:250px ;height:30px" id="genre">
+            <option value>Action</option>
+            <option value>Drama</option>
+            <option value>Romance</option>
+            <option value>Fantasy</option>
+            <option value>Horror</option>
+            <option value>Thriller</option>
+            <option value>Comedy</option>
+            <option value>Sci-Fi</option>
+          </select><br><br></td>
+        </tr>
+        <tr>
+          <td>IMDb Rating</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="number" style=" width:250px ;height:30px" size="30" placeholder="Ex:- 8.5" id="rating" required><br><br></td>
+        </tr>
+       
+        <tr>
+          <td>Movie Field</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="text" style=" width:250px ;height:30px" size="30" placeholder="Ex:-Kollywood" id="field" required><br><br></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Actor</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="text" style=" width:250px ;height:30px"size="30" placeholder="Ex:- Vishal" id="actor" required><br><br></td>
+        </tr>
+
+        <tr>
+          <td>Director</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="text" style=" width:250px ;height:30px" size="30" placeholder="Ex:- Lokesh Kanagaraj" id="director" required><br><br></td>
+        </tr>
+
+
+      </table>
+      <br>
+      <div style=" text-align:center">
+      <input type="reset" value="Reset" style=" width:150px ;height:50px; font-size:20px; background-color:#e1ebe6; color:rgb(15, 13, 13); border-radius: 5px; font-family:Martian Mono ">
+     
+      </div>
+      <br>
+      <br>
+    </form>
+    </center>
+    
+
+</div>
+<div style=" color:white; background-color:#141615;flex-grow: 1;flex-basis:50%; border-top-right-radius: 20px; border-bottom-right-radius: 20px; margin-right:10px">
+  <div class="container" style=" margin-top:100px; margin-right: 10px;">
+    <div class="card">
+      <h3 class="title">Kollywood</h3>
+      <img src="Ghilli_mass🔥.jpeg">
+      <div class="bar">
+        <div class="emptybar"></div>
+        <div class="filledbar"></div>
+      </div>
+      <div class="circle">
+        
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <circle class="stroke" cx="60" cy="60" r="50"/>
+      </svg>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="title">Bollywood</h3>
+      <img src="ANIMAL MOVIE.jpeg">
+      <div class="bar">
+        <div class="emptybar"></div>
+        <div class="filledbar"></div>
+      </div>
+      <div class="circle">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <circle class="stroke" cx="60" cy="60" r="50"/>
+      </svg>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="title">Hollywood</h3>
+      <img src="Fightclub.jpeg">
+      <div class="bar">
+        <div class="emptybar"></div>
+        <div class="filledbar"></div>
+      </div>
+      <div class="circle">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <circle class="stroke" cx="60" cy="60" r="50"/>
+      </svg>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="title">Sandalwood</h3>
+      <img src="KGF.jpeg">
+      <div class="bar">
+        <div class="emptybar"></div>
+        <div class="filledbar"></div>
+      </div>
+      <div class="circle">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <circle  class="stroke" cx="60" cy="60" r="50"/>
+       
+      </svg>
+      </div>
+    </div>
+  </div>
+  <p style=" text-align:center; font-family:Martian Mono; font-size: 20px">PREDICTIONS ARE DONE IN ALL FIELDS OF CINEMA</p>
+
+  <div style=" text-align:center">
+    <button type="button" id="myButton" >Generate Result</button>
+  </div>
+  <script>
+
+
+
+  </script>
+</div>
+
+   </div>
